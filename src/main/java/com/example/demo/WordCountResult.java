@@ -51,7 +51,7 @@ public final class WordCountResult {
     private void countWords(final Map<String, String> map) {
         // assume there could be several paragraphs passed to us to process sence
         // we accept a JSON Map for processing
-        map.forEach((String key, String value) -> {
+        map.forEach((final String key, String value) -> {
             value = value.trim();
             // only count if there are letters found in the sentence
             if (!value.isEmpty()) {
