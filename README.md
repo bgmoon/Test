@@ -1,1 +1,1 @@
-# Test project for counting words and letters
+# Test project for counting words and letters in a MAP of paragraphs using POST methods with MAPs in the payload of the messages.  This project is intended to be run by NetBeans 8.2 with the springboot plugin installed into the IDE, but the maven artifacts should work with most environments.
