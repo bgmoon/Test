@@ -49,7 +49,7 @@ public final class LetterCountResult {
 
     private void countLetters(final Map<String, String> map) {
         // extract each paragraph, text pair
-        map.forEach((String key, String value) -> {
+        map.forEach((final String key, String value) -> {
             // only count if there are letters found in the text
             if (!value.isEmpty()) {
                 final Map<Character,Long> paragraphCount = new HashMap<>();
