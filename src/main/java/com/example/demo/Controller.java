@@ -54,7 +54,7 @@ public class Controller {
      * @return a string description of the error
      */
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<String> handleAllExceptions(Exception ex, WebRequest request) {
+    public final ResponseEntity<String> handleAllExceptions(final Exception ex, final WebRequest request) {
         final String errorDetails = new Date() +  ex.getMessage() + request.getDescription(false);
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -72,7 +72,7 @@ public class Controller {
      * with their associated word counts
      */
     @PostMapping(value = "/wordCountPerSentence", consumes = "application/json", produces = "application/json")
-    public WordCountResult wordCountPerSentence(@RequestBody Map<String, String> map) {
+    public WordCountResult wordCountPerSentence(@RequestBody final Map<String, String> map) {
         return new WordCountResult(map);
     }
 
@@ -88,7 +88,7 @@ public class Controller {
      * @return a map of letters with a count of each letter detected
      */
     @PostMapping(value = "/totalLetterCount", consumes = "application/json", produces = "application/json")
-    public LetterCountResult totalLetterCount(@RequestBody Map<String, String> map) {
+    public LetterCountResult totalLetterCount(@RequestBody final Map<String, String> map) {
         return new LetterCountResult(map);
     }
 }
