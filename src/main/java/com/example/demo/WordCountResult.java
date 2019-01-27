@@ -58,7 +58,7 @@ public final class WordCountResult {
                 // allocate a map to hold sentenece and count for each sentence detected
                 final Map<String, Long> sentenceCountMap = new HashMap<>();
                 // spit the text into sentences as defined by text ending in ".", or "?" or "!"
-                final String sentences[] = value.split("\\.|\\?|\\!");
+                final String sentences[] = value.split("\\. |\\.$|\\?|\\!");
                 // for each sentence, count words
                 for (final String sentence : sentences) {
                     // trim up each sentence
