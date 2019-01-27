@@ -75,7 +75,7 @@ public final class LetterCountResult {
         return result;
     }
 
-    public void setResult(Map<String, Map<Character, Long>> result) {
+    public void setResult(final Map<String, Map<Character, Long>> result) {
         this.result = result;
     }
 
