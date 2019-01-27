@@ -25,19 +25,39 @@
  */
 package com.example.demo;
 
+import java.util.Date;
 import java.util.Map;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.WebRequest;
 
 /**
+ *
+ * The controller class holds the REST interfaces for this simple application.
  *
  * @author bgmoon
  */
 @RestController
 @RequestMapping("/")
 public class Controller {
+
+    /**
+     * Generic exception handler
+     * 
+     * @param ex the exception created during processing
+     * @param request the request from the user
+     * @return a string description of the error
+     */
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<String> handleAllExceptions(Exception ex, WebRequest request) {
+        final String errorDetails = new Date() +  ex.getMessage() + request.getDescription(false);
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     /**
      * Count words in each sentence. Test with this command:

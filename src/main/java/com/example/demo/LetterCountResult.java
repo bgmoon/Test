@@ -30,6 +30,13 @@ import java.util.Map;
 
 /**
  *
+ * This class counts the number of each letter found in sentences.  It takes a map
+ * as its input where each key is the name of a paragraph and the value is an arbitrary
+ * bit of text.  I then produces a map, where the key is the name of the paragraph
+ * and the value is another map where the keys of that make are some letter and the
+ * value is the count of that letter.  Letters are case in-sensitive.
+ * 
+ * 
  * @author bgmoon
  */
 public final class LetterCountResult {
@@ -46,18 +53,21 @@ public final class LetterCountResult {
             // only count if there are letters found in the text
             if (!value.isEmpty()) {
                 final Map<Character,Long> paragraphCount = new HashMap<>();
+                // convert to case in-sentive and rub out unwanted symbols
                 value = value.trim().toUpperCase().replaceAll("[^\\p{L}]", "");
                 // for each letter, count it.
                 for (int i = 0; i < value.length(); i++) {
                     final char c = value.charAt(i);
                     if (paragraphCount.containsKey(c)) {
+                        // existing character so increment the value
                         paragraphCount.put(c, paragraphCount.get(c) + 1);
                     } else {
+                        // new character, so just add it with a count of 1
                         paragraphCount.put(c, 1L);
                     }
-                }
+                } // end for each character in the sentence
                 result.put(key,paragraphCount);
-            }
+            } // end if there is at least one charcater in the paragraph
         });
     }
 
@@ -67,5 +77,10 @@ public final class LetterCountResult {
 
     public void setResult(Map<String, Map<Character, Long>> result) {
         this.result = result;
+    }
+
+    @Override
+    public String toString() {
+        return "LetterCountResult{" + "result=" + result + '}';
     }
 }

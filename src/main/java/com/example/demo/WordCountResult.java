@@ -29,12 +29,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * This class counts the number of words in a set of sentences.  It takes a map
+ * with each element's key being the name of a paragraph and the value being an
+ * arbitrary number of sentences.  It then creates a map where the key is the paragraph
+ * and the value is another map, where each key in that map is one of the sentences
+ * in that paragraph and the value is the number of words in that sentence.
+ * 
+ * A sentences is defined as a group of one or more non-white space letters that 
+ * end with either a "." or a "?" or a "!".
  *
  * @author bgmoon
  */
 public final class WordCountResult {
 
-    private Map<String, Map<String, Long>> wordCount = new HashMap<>();
+    private Map<String, Map<String, Long>> result = new HashMap<>();
 
     public WordCountResult(final Map<String, String> map) {
         countWords(map);
@@ -61,19 +69,25 @@ public final class WordCountResult {
                         // trimmed sentence and the value being the word count for that
                         // sentence
                         sentenceCountMap.put(trim, new Long(trim.split("\\s+").length));
-                    }
-                }
+                    } // end if there is at least 1 word
+                } // end for each sentence in paragraph
                 // save away the sentence/count map for this paragraph
-                wordCount.put(key, sentenceCountMap);
-            }
+                result.put(key, sentenceCountMap);
+            } // end if there is at least one sentence
         });
     }
 
-    public Map<String, Map<String, Long>> getWordCount() {
-        return wordCount;
+    public Map<String, Map<String, Long>> getResult() {
+        return result;
     }
 
-    public void setWordCount(final Map<String, Map<String, Long>> wordCount) {
-        this.wordCount = wordCount;
+    public void setResult(final Map<String, Map<String, Long>> result) {
+        this.result = result;
     }
+
+    @Override
+    public String toString() {
+        return "WordCountResult{" + "result=" + result + '}';
+    }
+
 }
